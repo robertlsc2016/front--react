@@ -6,7 +6,13 @@ import { Link } from "react-router-dom";
 import { HomeButton } from "./components/HomeButton";
 function App() {
   return (
-    <div className="App">
+    <div
+      className="App"
+      style={{
+        width: "100%",
+        height: "100%",
+      }}
+    >
       <HomeButton />
       <GlobalStyle />
       <AppRouter />

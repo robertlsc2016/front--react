@@ -28,9 +28,10 @@ export const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
         height: 100%;
         width: 100%;
+
         border-radius: 16px;
         padding: 8px;
-        background-color: #fff;
+        background-color: #f5ffff;
         box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
     }
 
@@ -38,8 +39,13 @@ export const GlobalStyle = createGlobalStyle`
         width: 100vw;
         height: 100vh;
         padding: 3% 15% 3% 15%;
-        background-color: #6c6c6c;
+        background-color: #808080;
 
+    }
+
+    #root{
+        height: 100%;
+        width: 100%;
     }
 
 `;

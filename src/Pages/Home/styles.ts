@@ -3,10 +3,12 @@ import styled from "styled-components";
 export const HomeContainer = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 32px;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: space-around;
   align-items: center;
   width: 100%;
-  height: 10%;
+  height: 100%;
+  /* border: 1px solid black; */
   /* background-color: red; */
 `;

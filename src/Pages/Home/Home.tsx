@@ -1,6 +1,8 @@
 import React from "react";
 import * as S from "./styles";
 import { CardBox } from "../../components/CardBox";
+import { BsPersonPlusFill } from "react-icons/bs";
+import { MdPersonSearch, MdGroups } from "react-icons/md";
 
 import { Link } from "react-router-dom";
 
@@ -8,29 +10,18 @@ export const Home: React.FC = () => {
   return (
     <S.HomeContainer>
       <CardBox
-        // illustartion={<PeopleAltOutlinedIcon />}
+        illustartion={<MdGroups size="64px" />}
         action={"Ver todos os Usuários"}
         route="usuarios"
       />
 
       <CardBox
-        // illustartion={<PersonRemoveOutlinedIcon />}
-        action={"Deletar Usuário"}
-        route="deletar-usuario"
-      />
-
-      <CardBox
-        // illustartion={<EditOutlinedIcon />}
-        action={"Editar Usuário"}
-        route="editar-usuario"
-      />
-      <CardBox
-        // illustartion={<PersonAddOutlinedIcon />}
+        illustartion={<BsPersonPlusFill size="64px" />}
         action={"Criar Usuário"}
         route="/cadastrar-usuario"
       />
       <CardBox
-        // illustartion={<PersonSearchOutlinedIcon />}
+        illustartion={<MdPersonSearch size="64px" />}
         action={"Buscar Usuário"}
         route="/buscar-usuario"
       />

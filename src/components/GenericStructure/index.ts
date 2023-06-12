@@ -1,0 +1,1 @@
+export { GenericStructure } from "./GenericStructure";

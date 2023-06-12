@@ -1,1 +1,0 @@
-export { UserDelete } from "./UserDelete";
