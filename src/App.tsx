@@ -1,24 +1,15 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import React, { ReactNode } from "react";
+import AppRouter from "./Routes/Routes";
+import { GlobalStyle } from "./theme/GlobalStyles";
+import { Button } from "antd";
+import { Link } from "react-router-dom";
+import { HomeButton } from "./components/HomeButton";
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <HomeButton />
+      <GlobalStyle />
+      <AppRouter />
     </div>
   );
 }
