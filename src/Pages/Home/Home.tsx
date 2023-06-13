@@ -3,6 +3,7 @@ import * as S from "./styles";
 import { CardBox } from "../../components/CardBox";
 import { BsPersonPlusFill } from "react-icons/bs";
 import { MdPersonSearch, MdGroups } from "react-icons/md";
+import { LuImport } from "react-icons/lu";
 
 import { Link } from "react-router-dom";
 
@@ -24,6 +25,12 @@ export const Home: React.FC = () => {
         illustartion={<MdPersonSearch size="64px" />}
         action={"Buscar Usuário"}
         route="/buscar-usuario"
+      />
+
+      <CardBox
+        illustartion={<LuImport size="64px" />}
+        action={"Importar Usuários"}
+        route="/importar-usuarios"
       />
     </S.HomeContainer>
   );

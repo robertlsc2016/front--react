@@ -54,7 +54,7 @@ export const UserEdit: React.FC = () => {
 
   return (
     <GenericStructure
-      header={<Typography.Title>Editar Usuário</Typography.Title>}
+      header={"Editar Usuário"}
       body={
         user !== undefined ? (
           <Form

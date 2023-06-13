@@ -48,7 +48,7 @@ export const UserSearch: React.FC = () => {
 
   return (
     <GenericStructure
-      header={<Typography.Title>Buscar Usuário</Typography.Title>}
+      header={"Buscar Usuário"}
       body={
         <div
           style={{
