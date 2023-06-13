@@ -81,6 +81,7 @@ export const Users: React.FC = () => {
       if (response.data !== undefined) {
         const Users = response.data.map((user: UsersProps) => {
           return {
+            key: user._id,
             name: user.name,
             email: user.email,
             IconActions: <ActionsButtons id={user._id} label={user.name} />,

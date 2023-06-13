@@ -40,7 +40,13 @@ export const GlobalStyle = createGlobalStyle`
         padding: 3% 15% 3% 15%;
         background-color: #808080;
 
+        @media screen and (max-width: 500px) {
+            padding: 3% 5% 3% 5%;
+
+        }
     }
+
+
 
     #root{
         height: 100%;
