@@ -187,8 +187,11 @@ export const UsersImport: React.FC<any> = () => {
               <FileExcelOutlined style={{ fontSize: "64px", color: "black" }} />
 
               <Typography.Title level={2}>
-                Erro ao enviar o Arquivo. Revise os dados e tente novamente
+                Erro ao enviar Arquivo. Revise os dados e tente novamente
               </Typography.Title>
+              <Link to="/importar-usuarios" reloadDocument>
+                <Button type="primary">Reiniciar</Button>
+              </Link>
             </div>
           )}
           {stageImportedFile === "FINISH" && (
