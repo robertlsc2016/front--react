@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useState, useCallback } from "react";
 import { GenericStructure } from "../../components/GenericStructure";
-import { Button, Form, Space, Typography, Upload } from "antd";
+import { Alert, Button, Form, Image, Space, Typography, Upload } from "antd";
 import {
   FileDoneOutlined,
   FileExcelOutlined,
@@ -10,7 +10,7 @@ import {
 } from "@ant-design/icons";
 import { useDropzone } from "react-dropzone";
 import api from "../../services/api";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 interface FileProps {
   file: Blob;
@@ -23,7 +23,7 @@ interface FileProps {
 export const UsersImport: React.FC<any> = () => {
   const [file, setFile] = useState<File | null | any>(null);
   const [stageImportedFile, setStageImportedFile] = useState("NOT_IMPORTED");
-
+  const navigate = useNavigate();
   function MyDropzone() {
     const onDrop = useCallback((acceptedFile: File[]) => {
       console.log(acceptedFile.length);
@@ -60,11 +60,12 @@ export const UsersImport: React.FC<any> = () => {
           alignItems: "center",
           color: "#bdbdbd",
           borderStyle: "dashed",
+          textAlign: 'center',
         }}
       >
         <input {...getInputProps()} />
         {isDragActive ? (
-          <p>Drop the files here ...</p>
+          <p>Solte o Arquivo... :)</p>
         ) : (
           <div
             style={{
@@ -81,6 +82,12 @@ export const UsersImport: React.FC<any> = () => {
               }}
             />
             <p>Solte o arquivo aqui ou clique aqui</p>
+
+            {/* <div>
+              <Alert message="Estrutura da planilha aceita" type="success" />
+              <img src="./assets/exemple.png" />
+              <code></code>
+            </div> */}
           </div>
         )}
       </div>
@@ -100,6 +107,10 @@ export const UsersImport: React.FC<any> = () => {
       .then((response) => {
         if (response.status === 201) {
           setStageImportedFile("FINISH");
+
+          setTimeout(() => {
+            navigate("/usuarios");
+          }, 5000);
         }
       })
       .catch(() => {
@@ -195,7 +206,28 @@ export const UsersImport: React.FC<any> = () => {
             </div>
           )}
           {stageImportedFile === "FINISH" && (
-            <>Arquivos Adicionados com Sucesso</>
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                backgroundColor: "#d9ffa7",
+                borderRadius: "16px",
+                display: "flex",
+                justifyContent: "center",
+                flexDirection: "column",
+                alignItems: "center",
+                color: "#bdbdbd",
+                gap: "16px",
+                textAlign: "center",
+              }}
+            >
+              <FileDoneOutlined style={{ fontSize: "64px", color: "black" }} />
+
+              <Typography.Title level={2}>
+                Arquivo Enviado com Sucesso. Você será redirecionado para tela
+                de Usuários
+              </Typography.Title>
+            </div>
           )}
         </div>
       }
