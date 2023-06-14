@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import * as S from "./styles";
 import api from "../../services/api";
 import {
+  Button,
   Divider,
   Spin,
   Table,
@@ -31,10 +32,12 @@ const columns: TableColumnsType<TableProps> = [
   {
     title: "Nome",
     dataIndex: "name",
+    width: "30%",
   },
   {
     title: "Email",
     dataIndex: "email",
+    width: "auto",
   },
   {
     title: (
@@ -62,6 +65,7 @@ type NotificationType = "success" | "info" | "warning" | "error";
 
 export const Users: React.FC = () => {
   const [users, setUsers] = useState<UsersProps[]>();
+  const [page, setPage] = useState(1);
   const [handleNotification, contextHolder] = notification.useNotification();
   const navigate = useNavigate();
 
@@ -73,23 +77,37 @@ export const Users: React.FC = () => {
   };
 
   useEffect(() => {
-    getAllUsers();
+    getPaginationUsers();
   }, []);
 
-  const getAllUsers = async () => {
-    const response = await api.get("/users").then((response) => {
-      if (response.data !== undefined) {
-        const Users = response.data.map((user: UsersProps) => {
-          return {
-            key: user._id,
-            name: user.name,
-            email: user.email,
-            IconActions: <ActionsButtons id={user._id} label={user.name} />,
-          };
-        });
-        setUsers(Users);
-      }
-    });
+  const getPaginationUsers = async () => {
+    const response = await api
+      .get(`/pagination/page=${page}`)
+      .then((response) => {
+        if (response.data !== undefined) {
+          const Users = response.data.map((user: UsersProps) => {
+            return {
+              key: user._id,
+              name: user.name,
+              email: user.email,
+              IconActions: <ActionsButtons id={user._id} label={user.name} />,
+            };
+          });
+          setUsers(Users);
+        }
+      });
+  };
+
+  const handleGetMore = () => {
+    setPage(page + 1);
+    getPaginationUsers();
+  };
+
+  const handleReturn = () => {
+    if (page > 1) {
+      setPage(page - 1);
+      getPaginationUsers();
+    }
   };
 
   const handleEdit = (id: string) => {
@@ -101,7 +119,7 @@ export const Users: React.FC = () => {
       .delete(`/delete-user/${id}`)
       .then(() => {
         openNotificationWithIcon("success");
-        getAllUsers();
+        getPaginationUsers();
       })
       .catch(() => {
         openNotificationWithIcon("error");
@@ -162,8 +180,13 @@ export const Users: React.FC = () => {
               <div
                 style={{
                   display: "flex",
-                  justifyContent: "flex-start",
-                  borderBottom: "1px solid black",
+                  justifyContent: "center",
+                  // borderBottom: "1px solid black",
+                  flexDirection: "column",
+                  alignContent: "center",
+                  gap: "8px",
+                  // backgroundColor: 'red',
+                  height: "100%",
                 }}
               >
                 <Table
@@ -172,10 +195,28 @@ export const Users: React.FC = () => {
                   pagination={false}
                   scroll={{ x: "100%", y: 350 }}
                   style={{
-                    height: "100%",
+                    // height: "100%",
                     overflow: "auto",
                   }}
                 />
+
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: "8px",
+                    // border: "1px solid black",
+                  }}
+                >
+                  <Button type="primary" onClick={() => handleReturn()}>
+                    Voltar
+                  </Button>
+                  <Button type="primary" onClick={() => handleGetMore()}>
+                    Avançar
+                  </Button>
+                </div>
               </div>
             )}
           </div>
