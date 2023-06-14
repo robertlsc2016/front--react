@@ -66,6 +66,8 @@ type NotificationType = "success" | "info" | "warning" | "error";
 export const Users: React.FC = () => {
   const [users, setUsers] = useState<UsersProps[]>();
   const [page, setPage] = useState(1);
+  const [lastPage, setLastPage] = useState(false);
+
   const [handleNotification, contextHolder] = notification.useNotification();
   const navigate = useNavigate();
 
@@ -93,14 +95,25 @@ export const Users: React.FC = () => {
               IconActions: <ActionsButtons id={user._id} label={user.name} />,
             };
           });
+
           setUsers(Users);
         }
       });
+
+    await api.get(`/pagination/page=${page + 1}`).then((response) => {
+      if (response.data.length === 0) {
+        setLastPage(true);
+      } else {
+        setLastPage(false);
+      }
+    });
   };
 
   const handleGetMore = () => {
-    setPage(page + 1);
-    getPaginationUsers();
+    if (lastPage === false) {
+      setPage(page + 1);
+      getPaginationUsers();
+    }
   };
 
   const handleReturn = () => {
@@ -187,15 +200,17 @@ export const Users: React.FC = () => {
                   gap: "8px",
                   // backgroundColor: 'red',
                   height: "100%",
+                  width: "100%",
                 }}
               >
                 <Table
                   columns={columns}
                   dataSource={users}
                   pagination={false}
-                  scroll={{ x: "100%", y: 350 }}
+                  scroll={{ y: 350 }}
                   style={{
                     // height: "100%",
+                    width: '100%',
                     overflow: "auto",
                   }}
                 />
